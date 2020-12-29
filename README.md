@@ -1,6 +1,10 @@
 # pokemon-api
 
-### About 
+### About
+
+Uses BeautifulSoup to retrieve the info of Pokemon by name from 
+https://www.pokemon.com/us/pokedex/
+
 
 APIs to get pokemon info
 
@@ -15,7 +19,7 @@ http://127.0.0.1:5000/api/v1/pokemons/
    
 
 2. POST     
-   Create a pokemon by name. Uses BeautifulSoup to retrieve the info of that Pokemon.
+   Create a pokemon by name. Uses info from beautifulsoup extraction.
    
    {
    "name" : "Bulbasaur"
