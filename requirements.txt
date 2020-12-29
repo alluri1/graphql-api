@@ -1,0 +1,8 @@
+beautifulsoup4
+graphene>=2.0
+requests
+Flask
+flask-restful
+jsonify
+flask
+pytest

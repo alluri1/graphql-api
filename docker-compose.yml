@@ -1,0 +1,6 @@
+version: "3"
+services:
+  pokemon-api:
+    build :
+      context : .
+      dockerfile: Dockerfile
