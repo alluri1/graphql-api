@@ -47,7 +47,6 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
-*.py,cover
 .hypothesis/
 .pytest_cache/
 
@@ -128,3 +127,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea/
+.pytest_cache
