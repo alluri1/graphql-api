@@ -46,7 +46,12 @@ http://0.0.0.0:5000/api/v1/pokemons/
 
 
 ### Installation
+1. Without docker
 ```
 pip install -r requirements.txt
 python3 api.py
+```
+2. Docker 
+```
+docker-compose up --build
 ```
