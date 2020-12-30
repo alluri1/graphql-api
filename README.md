@@ -8,7 +8,7 @@ https://www.pokemon.com/us/pokedex/
 
 APIs to get pokemon info
 
-http://127.0.0.1:5000/api/v1/pokemons/    
+http://0.0.0.0:5000/api/v1/pokemons/    
  
 1. GET     
    Retrieves a pokemon by name  
@@ -29,8 +29,11 @@ http://127.0.0.1:5000/api/v1/pokemons/
 3. PUT     
    Retrieves a pokemon by name  
    
-   {
-   "name" : "Bulbasaur"
+   {"name" : "Bulbasaur",
+   
+   "height" : "5.3",
+   
+   "weight": "15.0 lbs"
    }   
    
 
