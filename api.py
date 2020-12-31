@@ -2,7 +2,7 @@ import flask
 from flask import jsonify, abort, request
 from flask_restful import Api
 
-from pokedex_extract import PokedexExtract
+from beautiful_soup.pokedex_extract import PokedexExtract
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True

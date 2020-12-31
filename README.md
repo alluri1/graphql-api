@@ -2,9 +2,10 @@
 
 ### About
 
-Uses BeautifulSoup to retrieve the info of Pokemon by name from 
+- Uses BeautifulSoup to retrieve the info of Pokemon by name from 
 https://www.pokemon.com/us/pokedex/
 
+- Graph QL API in progress
 
 APIs to get pokemon info
 

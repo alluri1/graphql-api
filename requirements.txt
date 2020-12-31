@@ -6,3 +6,4 @@ flask-restful
 jsonify
 flask
 pytest
+Flask-GraphQL
