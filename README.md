@@ -3,56 +3,39 @@
 ### About
 
 - Uses BeautifulSoup to retrieve the info of Pokemon by name from 
-https://www.pokemon.com/us/pokedex/
 
-- Graph QL API in progress
-
-APIs to get pokemon info
-
-http://0.0.0.0:5000/api/v1/pokemons/    
- 
-1. GET     
-   Retrieves a pokemon by name  
-   
-   {
-   "name" : "Bulbasaur"
-   }
-   
-
-2. POST     
-   Create a pokemon by name. Uses info from beautifulsoup extraction.
-   
-   {
-   "name" : "Bulbasaur"
-   }   
+   https://www.pokemon.com/us/pokedex/
 
 
-3. PUT     
-   Retrieves a pokemon by name  
-   
-   {"name" : "Bulbasaur",
-   
-   "height" : "5.3",
-   
-   "weight": "15.0 lbs"
-   }   
-   
+-  GraphQL API's
 
-4. DELETE 
-   Deletes a pokemon by name  
-   
-   {
-   "name" : "Bulbasaur"
-   }   
+   http://0.0.0.0:8000/api/v1/pokemons/
 
+
+- REST APIs to get pokemon info
+
+  http://0.0.0.0:5000/api/v1/pokemons/
+
+   1. GET - Retrieves a pokemon by name
+   
+   2. POST - Create a pokemon by name. Uses info from beautifulsoup extraction.
+   
+   3. PUT  - Retrieves a pokemon by name. Can update height and weight of a pokemon by name
+   
+   4. DELETE    -   Deletes a pokemon by name
 
 ### Installation
-1. Without docker
+1. GraphQL API - w/o docker
+```
+python3 graphql_api/server.py
+```
+2. REST API - w/o docker
 ```
 pip install -r requirements.txt
-python3 api.py
+python3 rest_api.py
 ```
-2. Docker 
+
+3. Docker for REST API
 ```
 docker-compose up --build
 ```

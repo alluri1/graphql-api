@@ -4,7 +4,7 @@ from beautiful_soup.pokedex_extract import PokedexExtract
 
 
 class Pokemon(ObjectType):
-    name = String(required=True)
+    name = String()
     weight = String()
     height = String()
     category = String()
@@ -15,9 +15,17 @@ class Pokemon(ObjectType):
 
 
 class CreatePokemon(Mutation):
+    class Arguments:
+        name = String()
 
-    def mutate(self, info):
-        pass
+    pokemon = Field(Pokemon)
+
+    def mutate(self, info, name):
+        pokedex_extract = PokedexExtract()
+        pokedex_extract.get_pokemon_info(name)
+        new_pokemon = pokedex_extract.pokemon
+
+        return CreatePokemon(new_pokemon)
 
 
 class Mutation(ObjectType):
@@ -25,10 +33,9 @@ class Mutation(ObjectType):
 
 
 class Query(ObjectType):
-    pokemon = Field(Pokemon)
+    pokemon = Field(Pokemon, name=String())
 
-    def resolve_pokemon(root, info, name):
-        print("resolve pokemon: ", name)
+    def resolve_pokemon(self, info, name):
         pokedex_extract = PokedexExtract()
         pokedex_extract.get_pokemon_info(name)
         new_pokemon = pokedex_extract.pokemon

@@ -1,9 +1,8 @@
-beautifulsoup4
+beautifulsoup4==4.9.3
+jsonify==0.5
+Flask==1.1.2
+flask-restful==0.3.8
 graphene>=2.0
-requests
-Flask
-flask-restful
-jsonify
-flask
-pytest
-Flask-GraphQL
+Flask-GraphQL==2.0.1
+requests==2.25.0
+pytest==6.2.1

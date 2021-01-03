@@ -10,11 +10,13 @@ api = Api(app)
 pokemons = []
 
 
+# home page
 @app.route('/', methods=['GET'])
 def hello():
     return "Hello! You can find pokemon info here"
 
 
+# creates a pokemon by calling PokedexExtract to get the required pokemon info
 @app.route('/api/v1/pokemons/', methods=['POST'])
 def create_pokemon():
     if not request.json or not 'name' in request.json:
@@ -29,6 +31,7 @@ def create_pokemon():
     return vars(new_pokemon), 201
 
 
+# get api to fetch a pokemon
 @app.route('/api/v1/pokemons/', methods=['GET'])
 def get_pokemon():
     if not request.json or not 'name' in request.json:
@@ -41,6 +44,7 @@ def get_pokemon():
     return {"pokemon": "not found"}, 404
 
 
+# put api to update pokemon info. It updates height, weight attributes only now
 @app.route('/api/v1/pokemons/', methods=['PUT'])
 def put_pokemon():
     if not request.json or not 'name' in request.json:
@@ -56,6 +60,7 @@ def put_pokemon():
     abort(404)
 
 
+# deletes a pokemon by name
 @app.route('/api/v1/pokemons/', methods=['DELETE'])
 def delete_pokemon():
     if not request.json or not 'name' in request.json:

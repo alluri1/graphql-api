@@ -8,12 +8,20 @@ from models.pokemon_model import PokemonModel
 
 
 class PokedexExtract:
+    """
+    Class to extract the Pokemon info with beautifulsoup from
+    https://www.pokemon.com/us/pokedex/ website
+    """
 
     def __init__(self):
         self.attributes = {}
         self.pokemon = PokemonModel()
 
     def get_pokemon_info(self, pokemon_name):
+        """
+        Calls different methods to aggregate all pokemon attributes
+        """
+        pokemon_name = pokemon_name.upper()
         URL = 'https://www.pokemon.com/us/pokedex/' + pokemon_name
         page = requests.get(URL)
         soup = BeautifulSoup(page.content, 'html.parser').body
@@ -22,12 +30,16 @@ class PokedexExtract:
         self.pokemon.name = pokemon_name
 
         # get required info from the soup object
-        self.get_physical_attributes(soup)
+        self.get_blue_rectangular_box_attributes(soup)
         self.get_pokemon_type(soup)
         self.get_pokemon_weaknesses(soup)
-        self.get_pokemon_image(soup, pokemon_name)
+        # self.get_pokemon_image(soup, pokemon_name)
 
-    def get_physical_attributes(self, soup):
+    def get_blue_rectangular_box_attributes(self, soup):
+        """
+        Get attributes in the blue box of webpage,
+        it includes height, weight, category, abilities
+        """
         left_info_elements = soup.find('div', class_='column-7').find_all("li")
         right_info_elements = soup.find('div', class_='column-7 push-7').find_all("li")
         left_info_elements.extend(right_info_elements)
@@ -50,14 +62,17 @@ class PokedexExtract:
                     self.pokemon.category = value
                 elif title == "Abilities":
                     # TODO: fix abilities in pokemon object
-                    print("abilities: ", value)
+                    # print("abilities: ", value)
                     self.pokemon.abilities = value
                 self.attributes[title] = value
 
             except AttributeError as ae:
-                print(ae)
+                pass
 
     def get_pokemon_type(self, soup):
+        """
+        Gets pokemon type from the text below blue rectangular box
+        """
         dtm_type_element = soup.find('div', class_="dtm-type")
         types_element = dtm_type_element.find_all("li")
         types = [element.a.string for element in types_element]
@@ -65,12 +80,18 @@ class PokedexExtract:
         self.pokemon.type = types
 
     def get_pokemon_weaknesses(self, soup):
+        """
+        Gets pokemon weaknesses from bottom right
+        """
         weaknesses_elements = soup.find('div', class_="dtm-weaknesses").find_all("li")
         weaknesses = [element.a.span.string.strip() for element in weaknesses_elements]
         self.attributes["Weaknesses"] = weaknesses
         self.pokemon.weaknesses = weaknesses
 
     def get_pokemon_image(self, soup, pokemon_name):
+        """
+        Downloads the pokemon image to images folder
+        """
         images_directory = os.listdir("images/")
         if pokemon_name + ".jpg" not in images_directory:
             images_element = soup.find("div", class_="profile-images").find("img")
@@ -82,6 +103,6 @@ if __name__ == "__main__":
     pokedex_extract = PokedexExtract()
     pokedex_extract.get_pokemon_info("ivysaur")
     attributes = pokedex_extract.attributes
-    print(attributes)
     pokemon_obj = pokedex_extract.pokemon
+    print(attributes)
     print(pokemon_obj)
